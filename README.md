@@ -171,3 +171,9 @@ adapter.addDatas(true,datas);
 ```
 334700525
 ```
+
+##内部使用第三方框架
+```
+RecyclerViewHeader
+    github地址：https://github.com/blipinsk/RecyclerViewHeader
+```
