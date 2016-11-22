@@ -81,6 +81,37 @@ RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 header.attachTo(recyclerView);
 ```
 
+##ViewHolder模板（ViewHolder如果是内部类必须加上static和public关键字）
+
+```
+public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean> {
+    //换成你布局文件中的id
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+
+    public MyRecyclerViewHolder(ViewGroup parentView, int itemResId) {
+        super(parentView, itemResId);
+    }
+
+    /**
+     * 绑定数据的方法，在mData获取数据（mData声明在基类中）
+     */
+    @Override
+    public void onBindRealData() {
+        tvTitle.setText(mData.title);
+    }
+
+
+    /**
+     * 给按钮添加点击事件（button改成你要添加点击事件的id）
+     * @param v
+     */
+    @OnClick(R.id.button)
+    public void click(CheckBox v) {
+    }
+}
+```
+
 ##BaseRecyclerAdapter使用方式
 
 ```
@@ -126,41 +157,6 @@ loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
     loadMoreViewHolder.loadingFinish("没有更多数据");
     
 ```
-
-
-
-
-##ViewHolder模板（ViewHolder如果是内部类必须加上static和public关键字）
-
-```
-public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean> {
-    //换成你布局文件中的id
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-
-    public MyRecyclerViewHolder(ViewGroup parentView, int itemResId) {
-        super(parentView, itemResId);
-    }
-
-    /**
-     * 绑定数据的方法，在mData获取数据（mData声明在基类中）
-     */
-    @Override
-    public void onBindRealData() {
-        tvTitle.setText(mData.title);
-    }
-
-
-    /**
-     * 给按钮添加点击事件（button改成你要添加点击事件的id）
-     * @param v
-     */
-    @OnClick(R.id.button)
-    public void click(CheckBox v) {
-    }
-}
-```
-
 
 ##向Adapter中添加数据
 
