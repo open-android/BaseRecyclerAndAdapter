@@ -110,8 +110,9 @@ loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
     loadMoreAdapter.setPullAndMoreListener(new PullToMoreListener() {
         @Override
         public void onRefreshLoadMore(BaseLoadMoreRecyclerAdapter.LoadMoreViewHolder loadMoreViewHolder) {
-            //加载更多
-            
+            //加载更多数据
+            ......
+            loadMoreAdapter.addDatas(true,datas);
         }
     
         @Override
