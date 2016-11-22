@@ -116,7 +116,7 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
 
 ```
 adapter = new BaseRecyclerAdapter(recyclerView
-        , MyViewHolder.class
+        , MyRecyclerViewHolder.class
         , R.layout.item_reyclerview
         , datas);
         
@@ -132,7 +132,7 @@ adapter = new BaseRecyclerAdapter(recyclerView
 
 ```
 loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
-        , MyViewHolder.class
+        , MyRecyclerViewHolder.class
         , R.layout.item_reyclerview
         , datas);
         
