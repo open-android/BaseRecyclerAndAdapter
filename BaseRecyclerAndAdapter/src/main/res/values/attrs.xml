@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="itheima_recyclerView">
+        <!--gridView几列-->
+        <attr name="spanCount" format="integer"/>
+    </declare-styleable>
+</resources>
