@@ -126,7 +126,6 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
 }
 ```
 
-[回到顶部](#readme)
 
 ##BaseLoadMoreRecyclerAdapter使用方式(加载跟多Adapter)
 
@@ -200,10 +199,10 @@ adapter.addDatas(true,datas);
 334700525
 ```
 
-[回到顶部](#readme)
-
 ##内部使用第三方框架
 ```xml
 RecyclerViewHeader
     github地址：https://github.com/blipinsk/RecyclerViewHeader
 ```
+
+[回到顶部](#readme)
