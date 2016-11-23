@@ -126,6 +126,7 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
 }
 ```
 
+[回到顶部](#readme)
 
 ##BaseLoadMoreRecyclerAdapter使用方式(加载跟多Adapter)
 
@@ -185,7 +186,6 @@ class MyTypeAdapter extends BaseRecyclerAdapter {
 }
 ```
 
-
 ##动态向Adapter中添加数据
 
 ```java
@@ -199,6 +199,8 @@ adapter.addDatas(true,datas);
 ```
 334700525
 ```
+
+[回到顶部](#readme)
 
 ##内部使用第三方框架
 ```xml
