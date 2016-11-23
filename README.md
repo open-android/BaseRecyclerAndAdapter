@@ -81,6 +81,20 @@ RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 header.attachTo(recyclerView);
 ```
 
+##BaseRecyclerAdapter使用方式
+
+```
+adapter = new BaseRecyclerAdapter(recyclerView
+        , MyRecyclerViewHolder.class
+        , R.layout.item_reyclerview
+        , datas);
+        
+@param recyclerView
+@param viewHolderClazz
+@param itemResId       recyclerView条目的资源id
+@param datas           recyclerView展示的数据集合（可以传null）
+```
+
 ##ViewHolder模板（ViewHolder如果是内部类必须加上static和public关键字）
 
 ```
@@ -112,19 +126,6 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
 }
 ```
 
-##BaseRecyclerAdapter使用方式
-
-```
-adapter = new BaseRecyclerAdapter(recyclerView
-        , MyRecyclerViewHolder.class
-        , R.layout.item_reyclerview
-        , datas);
-        
-@param recyclerView
-@param viewHolderClazz
-@param itemResId       recyclerView条目的资源id
-@param datas           recyclerView展示的数据集合（可以传null）
-```
 
 ##BaseLoadMoreRecyclerAdapter使用方式(加载跟多Adapter)
 
@@ -155,10 +156,37 @@ loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
 控制加状态
     loadMoreViewHolder.loading("加载中...");//默认文字："加载中..."
     loadMoreViewHolder.loadingFinish("没有更多数据");
-    
 ```
 
-##向Adapter中添加数据
+##Adapter分类
+```
+class MyTypeAdapter extends BaseRecyclerAdapter {
+    private final int ITEM_TYPE_1 = 0;
+    private final int ITEM_TYPE_2 = 1;
+
+    public MyTypeAdapter(RecyclerView recyclerView, List datas) {
+        super(recyclerView, null, 0, datas);
+    }
+
+    @Override
+    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        //选择类型
+        if (viewType == ITEM_TYPE_2) {
+            return new MyTypeHolder2(parent, R.layout.item_type2);
+        }
+        return new MyTypeHolder1(parent, R.layout.item_type1);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        //根据position返回类型
+        return position % 2 == 0 ? ITEM_TYPE_2 : ITEM_TYPE_1;
+    }
+}
+```
+
+
+##动态向Adapter中添加数据
 
 ```
 @param isLoadMore 数据是否累加
