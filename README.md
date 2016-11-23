@@ -4,7 +4,7 @@
 开始
 ===
 在project的build.gradle添加如下代码(如下图)
-```
+```xml
 allprojects {
     repositories {
         ...
@@ -15,7 +15,7 @@ allprojects {
 ```
 ![image](img/jitpack.png)
 在build.gradle添加依赖
-```
+```xml
 compile 'com.github.itcastsh:BaseRecyclerAndAdapter:0.1.2'
 compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
@@ -23,7 +23,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
 ##ItheimaRecyclerView使用方式
 
-```
+```xml
 网格RecyclerView(app:spanCount="2"，spanCount取值范围[1,10])
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -52,7 +52,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ##ItheimaRecyclerView添加头
 
 ![image](img/recyclerViewHeader.png)
-```
+```xml
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -83,7 +83,7 @@ header.attachTo(recyclerView);
 
 ##BaseRecyclerAdapter使用方式
 
-```
+```java
 adapter = new BaseRecyclerAdapter(recyclerView
         , MyRecyclerViewHolder.class
         , R.layout.item_reyclerview
@@ -97,7 +97,7 @@ adapter = new BaseRecyclerAdapter(recyclerView
 
 ##ViewHolder模板（ViewHolder如果是内部类必须加上static和public关键字）
 
-```
+```java
 public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean> {
     //换成你布局文件中的id
     @BindView(R.id.tv_title)
@@ -131,7 +131,7 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
 
 ![image](img/loadMoreAdapter.png)
 
-```
+```java
 loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
         , MyRecyclerViewHolder.class
         , R.layout.item_reyclerview
@@ -159,7 +159,7 @@ loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
 ```
 
 ##Adapter分类
-```
+```java
 class MyTypeAdapter extends BaseRecyclerAdapter {
     private final int ITEM_TYPE_1 = 0;
     private final int ITEM_TYPE_2 = 1;
@@ -188,7 +188,7 @@ class MyTypeAdapter extends BaseRecyclerAdapter {
 
 ##动态向Adapter中添加数据
 
-```
+```java
 @param isLoadMore 数据是否累加
 @param datas      List数据
 
@@ -201,7 +201,7 @@ adapter.addDatas(true,datas);
 ```
 
 ##内部使用第三方框架
-```
+```xml
 RecyclerViewHeader
     github地址：https://github.com/blipinsk/RecyclerViewHeader
 ```
