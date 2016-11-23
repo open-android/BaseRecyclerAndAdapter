@@ -24,7 +24,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ##ItheimaRecyclerView使用方式
 
 ```
-网格RecyclerView(app:spanCount="2")
+网格RecyclerView(app:spanCount="2"，spanCount取值范围[1,10])
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     <org.itheima.recycler.widget.ItheimaRecyclerView
@@ -40,7 +40,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
         
-横向滚动RecyclerView（11:一行，12:二行.......）
+横向滚动RecyclerView（11:一行，12:二行.......,spanCount取值范围[11,19]）
 
     <org.itheima.recycler.widget.ItheimaRecyclerView
         android:id="@+id/recyclerview"
