@@ -16,7 +16,7 @@ allprojects {
 ![image](img/jitpack.png)
 在build.gradle添加依赖
 ```xml
-compile 'com.github.itcastsh:BaseRecyclerAndAdapter:0.1.2'
+compile 'com.github.open-android:BaseRecyclerAndAdapter:0.1.2'
 compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ```
