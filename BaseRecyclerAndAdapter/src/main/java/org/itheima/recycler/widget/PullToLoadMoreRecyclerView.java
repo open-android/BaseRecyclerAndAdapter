@@ -22,7 +22,7 @@ import retrofit2.Call;
  * Created by lyl on 2016/10/7.
  */
 
-public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePageBean> implements PullToMoreListener {
+public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePageBean> extends PullToMoreListener {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ItheimaRecyclerView mRecyclerView;
@@ -75,10 +75,17 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
         return new int[]{R.color.colorPrimary};
     }
 
+    Map<String, Object> mParamMap = new HashMap<>();
+    Map<String, Object> mHeaderMap = new HashMap<>();
 
     public Map<String, Object> putParam(String key, Object value) {
         mParamMap.put(key, value);
         return mParamMap;
+    }
+
+    public Map<String, Object> putHeader(String key, Object value) {
+        mHeaderMap.put(key, value);
+        return mHeaderMap;
     }
 
 
@@ -103,13 +110,16 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
         requestData(false);
     }
 
-    Map<String, Object> mParamMap = new HashMap<>();
 
     private void requestData(final boolean isLoadMore) {
         mParamMap.put(mCurPageKey, String.valueOf(mCurPage));
         mParamMap.put(mPageSizeKey, String.valueOf(mPageSize));
         Request request = ItheimaHttp.newGetRequest(getApi());
         request.putParamsMap(mParamMap);
+
+        if (mHeaderMap != null && mHeaderMap.size() > 0) {
+            request.putHeaderMap(mHeaderMap);
+        }
         mCall = ItheimaHttp.send(request, new HttpResponseListener<HttpResponseBean>() {
             @Override
             public void onResponse(HttpResponseBean responseBean) {
@@ -164,8 +174,11 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
             mCall.cancel();
             mCall = null;
         }
-        mLoadMoreRecyclerViewAdapter.setPullAndMoreListener(null);
-        mLoadMoreRecyclerViewAdapter = null;
+
+        if (mLoadMoreRecyclerViewAdapter != null) {
+            mLoadMoreRecyclerViewAdapter.setPullAndMoreListener(null);
+            mLoadMoreRecyclerViewAdapter = null;
+        }
 
         mHttpResponseCall = null;
     }

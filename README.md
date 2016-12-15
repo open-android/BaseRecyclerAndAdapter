@@ -16,7 +16,7 @@ allprojects {
 ![image](img/jitpack.png)
 在build.gradle添加依赖
 ```xml
-compile 'com.github.open-android:BaseRecyclerAndAdapter:0.1.3'
+compile 'com.github.open-android:BaseRecyclerAndAdapter:0.2.3'
 compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ```
@@ -142,14 +142,9 @@ loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
     loadMoreAdapter.setPullAndMoreListener(new PullToMoreListener() {
         @Override
         public void onRefreshLoadMore(BaseLoadMoreRecyclerAdapter.LoadMoreViewHolder loadMoreViewHolder) {
-            //加载更多数据
+            //加载更多数据（自己实现）
             ......
             loadMoreAdapter.addDatas(true,datas);
-        }
-    
-        @Override
-        public void onRefresh() {
-            //暂时无用，下啦刷新
         }
     });
 
@@ -157,6 +152,54 @@ loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
     loadMoreViewHolder.loading("加载中...");//默认文字："加载中..."
     loadMoreViewHolder.loadingFinish("没有更多数据");
 ```
+
+##下啦刷新 & 加载更多组合控件（下啦刷新和加载更多内部实现，你只需要在对应的ViewHolder做数据绑定即可）
+
+####xml布局
+```xml
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <org.itheima.recycler.widget.ItheimaRecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+```
+####java代码实现布局
+```java
+pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<HomeHotBean>(mSwipeRefreshLayout, recyclerView, MyViewHolder.class) {
+            @Override
+            public int getItemResId() {
+                //recylerview item资源id
+                return R.layout.item_recylerview;
+            }
+
+            @Override
+            public String getApi() {
+                //接口
+                return "order/list";
+            }
+        };
+
+//设置当前页码的key
+pullToLoadMoreRecyclerView.setCurPageKey("curPage");
+//设置每一页数据条数Key
+pullToLoadMoreRecyclerView.setPageSizeKey("pageSize");
+//设置每一页数据条数
+pullToLoadMoreRecyclerView.setPageSize(20);
+
+
+//添加头
+pullToLoadMoreRecyclerView.putHeader(key,value);
+//添加请求参数
+pullToLoadMoreRecyclerView.putParam(key, value);
+//开始请求
+pullToLoadMoreRecyclerView.requestData();
+```
+
 
 ##Adapter分类
 ```java
