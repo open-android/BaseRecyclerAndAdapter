@@ -4,7 +4,7 @@
 [开始](#1)
 =======
 
-[##在project的build.gradle添加如下代码(如下图)](#1)
+[toc]##在project的build.gradle添加如下代码(如下图)(#1)
 ```xml
 allprojects {
     repositories {
