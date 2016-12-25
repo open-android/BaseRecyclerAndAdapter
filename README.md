@@ -235,15 +235,8 @@ class MyTypeAdapter extends BaseRecyclerAdapter {
 adapter.addDatas(true,datas);
 ```
 
-##交流群
-```
-334700525
-```
 
-##内部使用第三方框架
-```xml
-RecyclerViewHeader
-    github地址：https://github.com/blipinsk/RecyclerViewHeader
-```
+
+
 
 [回到顶部](#readme)
