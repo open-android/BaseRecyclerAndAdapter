@@ -126,33 +126,6 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
 }
 ```
 
-
-##BaseLoadMoreRecyclerAdapter使用方式(加载跟多Adapter)
-
-![image](img/loadMoreAdapter.png)
-
-```java
-loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
-        , MyRecyclerViewHolder.class
-        , R.layout.item_reyclerview
-        , datas);
-        
-
-设置加载更多监听
-    loadMoreAdapter.setPullAndMoreListener(new PullToMoreListener() {
-        @Override
-        public void onRefreshLoadMore(BaseLoadMoreRecyclerAdapter.LoadMoreViewHolder loadMoreViewHolder) {
-            //加载更多数据（自己实现）
-            ......
-            loadMoreAdapter.addDatas(true,datas);
-        }
-    });
-
-控制加状态
-    loadMoreViewHolder.loading("加载中...");//默认文字："加载中..."
-    loadMoreViewHolder.loadingFinish("没有更多数据");
-```
-
 ##下啦刷新 & 加载更多组合控件（下啦刷新和加载更多内部实现，你只需要在对应的ViewHolder做数据绑定即可）
 
 ####xml布局
@@ -170,7 +143,7 @@ loadMoreAdapter = new BaseLoadMoreRecyclerAdapter(recyclerView
 ```
 ####java代码实现布局
 ```java
-pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<HomeHotBean>(mSwipeRefreshLayout, recyclerView, MyViewHolder.class) {
+pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshLayout, recyclerView, MyViewHolder.class) {
             @Override
             public int getItemResId() {
                 //recylerview item资源id
@@ -183,13 +156,33 @@ pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<HomeHotBean>(mSwipeR
                 return "order/list";
             }
         };
+设置监听
+pullToLoadMoreRecyclerView.setLoadingDataListener(new PullToLoadMoreRecyclerView.LoadingDataListener<Bean>() {
 
-//设置当前页码的key
-pullToLoadMoreRecyclerView.setCurPageKey("curPage");
-//设置每一页数据条数Key
-pullToLoadMoreRecyclerView.setPageSizeKey("pageSize");
-//设置每一页数据条数
-pullToLoadMoreRecyclerView.setPageSize(20);
+        @Override
+        public void onRefresh() {
+            //监听下啦刷新，如果不需要监听可以不重新该方法
+            L.i("setLoadingDataListener onRefresh");
+        }
+
+        @Override
+        public void onStart() {
+            //监听http请求开始，如果不需要监听可以不重新该方法
+            L.i("setLoadingDataListener onStart");
+        }
+
+        @Override
+        public void onSuccess(Bean o) {
+            //监听http请求成功，如果不需要监听可以不重新该方法
+            L.i("setLoadingDataListener onSuccess: " + o);
+        }
+
+        @Override
+        public void onFailure() {
+             //监听http请求失败，如果不需要监听可以不重新该方法
+            L.i("setLoadingDataListener onFailure");
+        }
+});
 
 
 //添加头
@@ -198,6 +191,11 @@ pullToLoadMoreRecyclerView.putHeader(key,value);
 pullToLoadMoreRecyclerView.putParam(key, value);
 //开始请求
 pullToLoadMoreRecyclerView.requestData();
+
+
+控制加状态，可以在监听中处理
+    loadMoreViewHolder.loading("加载中...");//默认文字："加载中..."
+    loadMoreViewHolder.loadingFinish("没有更多数据");
 ```
 
 

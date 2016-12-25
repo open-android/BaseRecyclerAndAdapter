@@ -44,6 +44,8 @@ public class SwipeRefreshHeaderRecyclerView extends BaseSwipeRefreshHeaderRecycl
 
     private BaseRecyclerAdapter mBaseRecyclerAdapter;
 
+    private SwipeLoadingDataListener mSwipeLoadingDataListener;
+
 
     public SwipeRefreshHeaderRecyclerView(Context context) {
         this(context, null);
@@ -57,6 +59,9 @@ public class SwipeRefreshHeaderRecyclerView extends BaseSwipeRefreshHeaderRecycl
 
     @Override
     public void onRefresh() {
+        if(mSwipeLoadingDataListener != null){
+            mSwipeLoadingDataListener.onRefresh();
+        }
         mCurPage = 1;
         mParamMap.put(mCurPageKey, mCurPage);
         requestData(false, mRequestMethod, mParamMap);
@@ -70,6 +75,9 @@ public class SwipeRefreshHeaderRecyclerView extends BaseSwipeRefreshHeaderRecycl
     }
 
     public void requestData(final boolean isLoadMore, RequestMethod method, Map<String, Object> paramMap) {
+        if(mSwipeLoadingDataListener != null){
+            mSwipeLoadingDataListener.onStart();
+        }
         mRequestMethod = method;
         if (paramMap != null) {
             mParamMap.putAll(paramMap);
@@ -84,22 +92,21 @@ public class SwipeRefreshHeaderRecyclerView extends BaseSwipeRefreshHeaderRecycl
         mCall = ItheimaHttp.send(request, new HttpResponseListener<BasePageBean>() {
             @Override
             public void onResponse(BasePageBean responseBean) {
+                if(mSwipeLoadingDataListener != null){
+                    mSwipeLoadingDataListener.onSuccess(responseBean);
+                }
                 mTotalPage = responseBean.totalPage;
                 mCurPage++;
                 mBaseRecyclerAdapter.addDatas(isLoadMore, responseBean.getItemDatas());
-//                pullLoadFinish();
-//                if (mHttpResponseCall != null) {
-//                    mHttpResponseCall.onResponse(responseBean);
-//                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable e) {
                 super.onFailure(call, e);
-//                pullLoadFinish();
-//                if (mHttpResponseCall != null) {
-//                    mHttpResponseCall.onFailure(call, e);
-//                }
+
+                if(mSwipeLoadingDataListener != null){
+                    mSwipeLoadingDataListener.onFailure();
+                }
 
             }
 
@@ -114,7 +121,7 @@ public class SwipeRefreshHeaderRecyclerView extends BaseSwipeRefreshHeaderRecycl
     }
 
 
-    public void prepareData(SwipeRefreshBean swipeRefreshBean) {
+   /* public void prepareData(SwipeRefreshBean swipeRefreshBean) {
         mSwipeRefreshBean = swipeRefreshBean;
         try {
             //反射获取有关于分页数据的值
@@ -143,12 +150,46 @@ public class SwipeRefreshHeaderRecyclerView extends BaseSwipeRefreshHeaderRecycl
             L.e(e);
         }
 
-    }
+    }*/
 
 
     public void setAdapter(BaseRecyclerAdapter adapter) {
         mBaseRecyclerAdapter = adapter;
         mItheimaRecyclerView.setAdapter(adapter);
+    }
+
+    public <T> void setSwipeLoadingDataListener(SwipeLoadingDataListener<T> swipeLoadingDataListener){
+        mSwipeLoadingDataListener = swipeLoadingDataListener;
+    }
+
+    /**
+     * 监听下啦刷新 & 上啦加载更多
+     * @param <T>
+     */
+    public static abstract class SwipeLoadingDataListener<T> {
+        /**
+         * 下啦刷新回调
+         */
+        public void onRefresh() {
+
+        }
+
+        /**
+         * http请求开始
+         */
+        public void onStart() {
+        }
+
+        /**
+         * http请求数据成功
+         * @param t
+         */
+        public void onSuccess(T t) {
+        }
+
+        public void onFailure(){
+
+        }
     }
 
 }

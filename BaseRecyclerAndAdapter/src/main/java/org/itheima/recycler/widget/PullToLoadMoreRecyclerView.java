@@ -28,6 +28,8 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
     private ItheimaRecyclerView mRecyclerView;
     private Class<? extends BaseRecyclerViewHolder> mViewHolderClazz;
 
+    private LoadingDataListener<HttpResponseBean> mLoadingDataListener;
+
     public PullToLoadMoreRecyclerView(SwipeRefreshLayout swipeRefreshLayout, ItheimaRecyclerView recyclerView, Class<? extends BaseRecyclerViewHolder> viewHolderClazz) {
         mSwipeRefreshLayout = swipeRefreshLayout;
         mRecyclerView = recyclerView;
@@ -91,6 +93,9 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
 
     @Override
     public void onRefresh() {
+        if (mLoadingDataListener != null) {
+            mLoadingDataListener.onRefresh();
+        }
         requestData();
     }
 
@@ -112,6 +117,9 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
 
 
     private void requestData(final boolean isLoadMore) {
+        if (mLoadingDataListener != null) {
+            mLoadingDataListener.onStart();
+        }
         mParamMap.put(mCurPageKey, String.valueOf(mCurPage));
         mParamMap.put(mPageSizeKey, String.valueOf(mPageSize));
         Request request = ItheimaHttp.newGetRequest(getApi());
@@ -127,8 +135,12 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
                 mCurPage++;
                 mLoadMoreRecyclerViewAdapter.addDatas(isLoadMore, responseBean.getItemDatas());
                 pullLoadFinish();
-                if (mHttpResponseCall != null) {
+               /* if (mHttpResponseCall != null) {
                     mHttpResponseCall.onResponse(responseBean);
+                }*/
+
+                if (mLoadingDataListener != null) {
+                    mLoadingDataListener.onSuccess(responseBean);
                 }
             }
 
@@ -136,8 +148,11 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
             public void onFailure(Call<ResponseBody> call, Throwable e) {
                 super.onFailure(call, e);
                 pullLoadFinish();
-                if (mHttpResponseCall != null) {
+                /*if (mHttpResponseCall != null) {
                     mHttpResponseCall.onFailure(call, e);
+                }*/
+                if (mLoadingDataListener != null) {
+                    mLoadingDataListener.onFailure();
                 }
 
             }
@@ -151,11 +166,11 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
 
     }
 
-    private HttpResponseListener<HttpResponseBean> mHttpResponseCall;
+    //private HttpResponseListener<HttpResponseBean> mHttpResponseCall;
 
-    public void setHttpResponseListener(HttpResponseListener<HttpResponseBean> call) {
+    /*public void setHttpResponseListener(HttpResponseListener<HttpResponseBean> call) {
         mHttpResponseCall = call;
-    }
+    }*/
 
     public void pullLoadFinish() {
         if (mSwipeRefreshLayout != null) {
@@ -180,7 +195,8 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
             mLoadMoreRecyclerViewAdapter = null;
         }
 
-        mHttpResponseCall = null;
+        //mHttpResponseCall = null;
+        mLoadingDataListener = null;
     }
     /*|||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 
@@ -202,5 +218,40 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
 
     public void setPageSizeKey(String pageSizeKey) {
         mPageSizeKey = pageSizeKey;
+    }
+
+    /*///////////////////////////////////////////////////*/
+    public void setLoadingDataListener(LoadingDataListener<HttpResponseBean> loadingDataListener) {
+        mLoadingDataListener = loadingDataListener;
+    }
+
+    /**
+     * 监听下啦刷新 & 上啦加载更多
+     */
+    public static abstract class LoadingDataListener<T> {
+        /**
+         * 下啦刷新回调
+         */
+        public void onRefresh() {
+
+        }
+
+        /**
+         * http请求开始
+         */
+        public void onStart() {
+        }
+
+        /**
+         * http请求数据成功
+         *
+         * @param t
+         */
+        public void onSuccess(T t) {
+        }
+
+        public void onFailure() {
+
+        }
     }
 }
