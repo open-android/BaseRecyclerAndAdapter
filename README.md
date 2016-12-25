@@ -165,7 +165,9 @@ pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshL
                 return "order/list";
             }
         };
-设置监听
+
+//设置监听
+
 pullToLoadMoreRecyclerView.setLoadingDataListener(new PullToLoadMoreRecyclerView.LoadingDataListener<Bean>() {
 
         @Override
