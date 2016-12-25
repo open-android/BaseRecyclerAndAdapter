@@ -1,10 +1,10 @@
 
 #RecyclerView & RecyclerView.Adapter封装
 
-[开始](#1)
+开始
 =======
 
-[toc]##在project的build.gradle添加如下代码(如下图)(#1)
+##在project的build.gradle添加如下代码(如下图)
 ```xml
 allprojects {
     repositories {
@@ -16,7 +16,7 @@ allprojects {
 ```
 ![image](img/jitpack.png)
 
-[##在build.gradle添加依赖](#2)
+##在build.gradle添加依赖
 
 ```xml
 compile 'com.github.open-android:BaseRecyclerAndAdapter:0.3.5'
@@ -24,7 +24,7 @@ compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ```
 
-[##ItheimaRecyclerView使用方式](#3)
+##ItheimaRecyclerView使用方式
 
 ```xml
 网格RecyclerView(app:spanCount="2"，spanCount取值范围[1,10])
@@ -52,7 +52,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
         app:spanCount="12"/>
 ```
 
-[##ItheimaRecyclerView添加头](#4)
+##ItheimaRecyclerView添加头
 
 ![image](img/recyclerViewHeader.png)
 
@@ -91,7 +91,7 @@ RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 header.attachTo(recyclerView);
 ```
 
-[##BaseRecyclerAdapter使用方式](#5)
+##BaseRecyclerAdapter使用方式
 
 ```java
 adapter = new BaseRecyclerAdapter(recyclerView
@@ -105,7 +105,7 @@ adapter = new BaseRecyclerAdapter(recyclerView
 @param datas           recyclerView展示的数据集合（可以传null）
 ```
 
-[##ViewHolder模板（ViewHolder如果是内部类必须加上static和public关键字）](#6)
+##ViewHolder模板（ViewHolder如果是内部类必须加上static和public关键字）
 
 ```java
 public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean> {
@@ -136,7 +136,7 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
 }
 ```
 
-[##下啦刷新 & 加载更多组合控件（下啦刷新和加载更多内部实现，你只需要在对应的ViewHolder做数据绑定即可）](#7)
+##下啦刷新 & 加载更多组合控件（下啦刷新和加载更多内部实现，你只需要在对应的ViewHolder做数据绑定即可）
 ```java
 使用前必须调用：ItheimaHttp.init(context, baseUrl);（如果调用过则不需要重复调用）
 ```
@@ -213,7 +213,7 @@ pullToLoadMoreRecyclerView.requestData();
 ```
 
 
-[##Adapter分类](#8)
+##Adapter分类
 ```java
 class MyTypeAdapter extends BaseRecyclerAdapter {
     private final int ITEM_TYPE_1 = 0;
@@ -240,7 +240,7 @@ class MyTypeAdapter extends BaseRecyclerAdapter {
 }
 ```
 
-[##动态向Adapter中添加数据](#9)
+##动态向Adapter中添加数据
 
 ```java
 @param isLoadMore 数据是否累加
