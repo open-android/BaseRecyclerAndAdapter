@@ -52,6 +52,9 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ##ItheimaRecyclerView添加头
 
 ![image](img/recyclerViewHeader.png)
+
+xml代码
+
 ```xml
 <FrameLayout
     android:layout_width="match_parent"
@@ -75,7 +78,11 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     </org.itheima.recycler.header.RecyclerViewHeader>
 </FrameLayout>
 
+```
 
+java代码
+
+```java
 RecyclerViewHeader header = (RecyclerViewHeader) findViewById(R.id.header);
 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 header.attachTo(recyclerView);
@@ -127,7 +134,9 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
 ```
 
 ##下啦刷新 & 加载更多组合控件（下啦刷新和加载更多内部实现，你只需要在对应的ViewHolder做数据绑定即可）
-
+```java
+使用前必须调用：ItheimaHttp.init(context, baseUrl);（如果调用过则不需要重复调用）
+```
 ####xml布局
 ```xml
     <android.support.v4.widget.SwipeRefreshLayout
