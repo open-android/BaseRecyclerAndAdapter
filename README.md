@@ -16,7 +16,7 @@ allprojects {
 ![image](img/jitpack.png)
 在build.gradle添加依赖
 ```xml
-compile 'com.github.open-android:BaseRecyclerAndAdapter:0.2.5'
+compile 'com.github.open-android:BaseRecyclerAndAdapter:0.3.5'
 compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ```
@@ -193,7 +193,7 @@ pullToLoadMoreRecyclerView.putParam(key, value);
 pullToLoadMoreRecyclerView.requestData();
 
 
-控制加状态，可以在监听中处理
+//控制加状态，可以在监听中处理
     loadMoreViewHolder.loading("加载中...");//默认文字："加载中..."
     loadMoreViewHolder.loadingFinish("没有更多数据");
 ```
