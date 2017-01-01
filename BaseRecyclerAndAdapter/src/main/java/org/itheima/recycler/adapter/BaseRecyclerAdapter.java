@@ -65,7 +65,7 @@ public class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyclerViewHo
         if (!isLoadMore) {
             clearAllData();
         }
-        if (datas != null && !mDatas.isEmpty()) {
+        if (datas != null && datas.size() > 0) {
             mDatas.addAll(datas);
             notifyDataSetChanged();
         }
