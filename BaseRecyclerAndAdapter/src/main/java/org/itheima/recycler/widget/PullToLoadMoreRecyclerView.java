@@ -71,7 +71,7 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
     public String mCurPageKey = "curPage";
     public String mPageSizeKey = "pageSize";
 
-    private BaseLoadMoreRecyclerAdapter mLoadMoreRecyclerViewAdapter;
+    public BaseLoadMoreRecyclerAdapter mLoadMoreRecyclerViewAdapter;
 
     public abstract int getItemResId();
 
@@ -105,7 +105,7 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
 
     @Override
     public void onRefreshLoadMore(BaseLoadMoreRecyclerAdapter.LoadMoreViewHolder holder) {
-        if (isMoreData()) {
+        if (isMoreData(holder)) {
             holder.loading(null);
             requestData(true);
         } else {
@@ -123,7 +123,7 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
     /**
      * 是否有更多数据（可以更具自己的分页条件重写）
      */
-    public boolean isMoreData() {
+    public boolean isMoreData(BaseLoadMoreRecyclerAdapter.LoadMoreViewHolder holder) {
         return mCurPage <= mTotalPage;
     }
 
