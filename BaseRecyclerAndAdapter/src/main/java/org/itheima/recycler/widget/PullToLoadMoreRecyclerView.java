@@ -30,7 +30,7 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
     /**
      * 扩展字段
      */
-    protected Object mMextendObject;
+    public Object mMextendObject;
 
     private LoadingDataListener<HttpResponseBean> mLoadingDataListener;
 
