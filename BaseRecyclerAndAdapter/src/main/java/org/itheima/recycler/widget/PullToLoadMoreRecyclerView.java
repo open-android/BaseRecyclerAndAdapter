@@ -27,6 +27,10 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ItheimaRecyclerView mRecyclerView;
     private Class<? extends BaseRecyclerViewHolder> mViewHolderClazz;
+    /**
+     * 扩展字段
+     */
+    protected Object mMextendObject;
 
     private LoadingDataListener<HttpResponseBean> mLoadingDataListener;
 
@@ -101,7 +105,7 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
 
     @Override
     public void onRefreshLoadMore(BaseLoadMoreRecyclerAdapter.LoadMoreViewHolder holder) {
-        if (mCurPage <= mTotalPage) {
+        if (isMoreData()) {
             holder.loading(null);
             requestData(true);
         } else {
@@ -110,9 +114,17 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
         }
     }
 
+
     public void requestData() {
         mCurPage = 1;
         requestData(false);
+    }
+
+    /**
+     * 是否有更多数据（可以更具自己的分页条件重写）
+     */
+    public boolean isMoreData() {
+        return mCurPage <= mTotalPage;
     }
 
 
@@ -120,8 +132,8 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
         if (mLoadingDataListener != null) {
             mLoadingDataListener.onStart();
         }
-        mParamMap.put(mCurPageKey, String.valueOf(mCurPage));
-        mParamMap.put(mPageSizeKey, String.valueOf(mPageSize));
+        mParamMap.put(mCurPageKey, mCurPage);
+        mParamMap.put(mPageSizeKey, mPageSize);
         Request request = ItheimaHttp.newGetRequest(getApi());
         request.putParamsMap(mParamMap);
 

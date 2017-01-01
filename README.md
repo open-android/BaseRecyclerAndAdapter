@@ -19,7 +19,7 @@ allprojects {
 ##在build.gradle添加依赖
 
 ```xml
-compile 'com.github.open-android:BaseRecyclerAndAdapter:0.3.5'
+compile 'com.github.open-android:BaseRecyclerAndAdapter:0.4.5'
 compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ```
@@ -167,6 +167,15 @@ pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshL
                 //接口
                 return "order/list";
             }
+
+            /**
+             * 是否有更多数据（可以更具自己的分页条件重写）
+             */
+            public boolean isMoreData() {
+                //在这里可以使用内部扩展字段mMextendObject在进行分页处理
+                //mMextendObject在LoadingDataListener.onSuccess回调中赋值
+                return mCurPage <= mTotalPage;
+            }
         };
 
 //设置监听
@@ -212,6 +221,21 @@ pullToLoadMoreRecyclerView.requestData();
     loadMoreViewHolder.loadingFinish("没有更多数据");
 ```
 
+####高级用法
+```java
+//如果使用数字控制页数可以使用如下api
+        //设置参数的key
+        setCurPageKey("curPage");//当前页key
+        setPageSizeKey("pageSize");//每一页数量的key
+        //设置参数的值
+        setPageSize(1);//设置每一页数量
+        setTotalPage(20);//设置一共有多少页
+//如果使用其他方式分页
+    可以设置setLoadingDataListener在onSuccess(Bean o)回调中处理分页
+    onSuccess回调在每一次加载数据成功后回调
+```
+
+
 
 ##Adapter分类
 ```java
@@ -247,6 +271,11 @@ class MyTypeAdapter extends BaseRecyclerAdapter {
 @param datas      List数据
 
 adapter.addDatas(true,datas);
+```
+##清空Adapter中所以数据(不推荐使用，使用adapter.addDatas(true,datas))可以实现相同的功能
+
+```java
+adapter.clearAllData();
 ```
 
 
