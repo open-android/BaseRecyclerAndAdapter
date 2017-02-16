@@ -23,7 +23,7 @@
 
 ### 2. 在Module的build.gradle添加依赖
 
-     compile 'com.github.open-android:BaseRecyclerAndAdapter:0.4.8'
+     compile 'com.github.open-android:BaseRecyclerAndAdapter:0.4.9'
      compile 'com.jakewharton:butterknife:8.4.0'
      annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
