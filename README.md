@@ -96,7 +96,7 @@ header.attachTo(recyclerView);
 
 ### 给RecyclerView的item添加点击事件和长按事件
 
-```xml
+```java
 mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mContext, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
     @Override
     public void onItemClick(View view, int position) {
