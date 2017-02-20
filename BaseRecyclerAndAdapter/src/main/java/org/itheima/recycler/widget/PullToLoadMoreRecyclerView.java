@@ -15,6 +15,7 @@ import org.itheima.recycler.viewholder.BaseRecyclerViewHolder;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Headers;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
@@ -142,7 +143,7 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
         }
         mCall = ItheimaHttp.send(request, new HttpResponseListener<HttpResponseBean>() {
             @Override
-            public void onResponse(HttpResponseBean responseBean) {
+            public void onResponse(HttpResponseBean responseBean, Headers headers) {
                 mTotalPage = responseBean.getTotalPage();
                 mCurPage++;
                 mLoadMoreRecyclerViewAdapter.addDatas(isLoadMore, responseBean.getItemDatas());
@@ -152,7 +153,7 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
                 }*/
 
                 if (mLoadingDataListener != null) {
-                    mLoadingDataListener.onSuccess(responseBean);
+                    mLoadingDataListener.onSuccess(responseBean, headers);
                 }
             }
 
@@ -259,7 +260,7 @@ public abstract class PullToLoadMoreRecyclerView<HttpResponseBean extends BasePa
          *
          * @param t
          */
-        public void onSuccess(T t) {
+        public void onSuccess(T t, Headers headers) {
         }
 
         public void onFailure() {
