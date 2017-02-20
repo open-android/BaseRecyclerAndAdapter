@@ -197,7 +197,7 @@ pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshL
             }
         };
 ```
-	//设置监听
+//设置监听
 ```java
 pullToLoadMoreRecyclerView.setLoadingDataListener(new PullToLoadMoreRecyclerView.LoadingDataListener<Bean>() {
 
@@ -292,7 +292,7 @@ adapter.addDatas(true,datas);
 ```
 ### 清空Adapter中所以数据(不推荐使用，使用adapter.addDatas(true,datas))可以实现相同的功能
 
-```
+```java
 adapter.clearAllData();
 ```
 详细的使用方法在DEMO里面都演示啦,如果你觉得这个库还不错,请赏我一颗star吧~~~ 
