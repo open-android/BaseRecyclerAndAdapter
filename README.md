@@ -11,7 +11,7 @@
 
 ## 使用步骤
 ### 1. 在project的build.gradle添加如下代码(如下图)
-```xml
+```groovy
 allprojects {
     repositories {
         ...
@@ -22,7 +22,7 @@ allprojects {
 ![](http://oi5nqn6ce.bkt.clouddn.com/itheima/booster/code/jitpack.png)
 
 ### 2. 在Module的build.gradle添加依赖
-```xml
+```groovy
 compile 'com.github.open-android:BaseRecyclerAndAdapter:0.5.11'
 compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
@@ -118,10 +118,10 @@ adapter = new BaseRecyclerAdapter(recyclerView
         , R.layout.item_reyclerview
         , datas);
 
-@param recyclerView
-@param viewHolderClazz
-@param itemResId       recyclerView条目的资源id
-@param datas           recyclerView展示的数据集合（可以传null）
+//@param recyclerView
+//@param viewHolderClazz
+//@param itemResId       recyclerView条目的资源id
+//@param datas           recyclerView展示的数据集合（可以传null）
 ```
 
 ### ViewHolder模板（ViewHolder如果是内部类必须加上static和public关键字）
@@ -197,6 +197,7 @@ pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshL
             }
         };
 ```
+
 //设置监听
 ```java
 pullToLoadMoreRecyclerView.setLoadingDataListener(new PullToLoadMoreRecyclerView.LoadingDataListener<Bean>() {
@@ -286,8 +287,9 @@ class MyTypeAdapter extends BaseRecyclerAdapter {
 ### 动态向Adapter中添加数据
 
 ```java
-@param isLoadMore 数据是否累加
-@param datas      List数据
+//@param isLoadMore 数据是否累加
+//@param datas      List数据
+
 adapter.addDatas(true,datas);
 ```
 ### 清空Adapter中所以数据(不推荐使用，使用adapter.addDatas(true,datas))可以实现相同的功能
