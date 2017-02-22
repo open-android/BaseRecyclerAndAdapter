@@ -188,13 +188,11 @@ pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshL
                 return "order/list";
             }
 
-            /**
-             * 是否有更多数据（可以更具自己的分页条件重写）
-             */
-            public boolean isMoreData() {
-                //在这里可以使用内部扩展字段mMextendObject在进行分页处理
-                //mMextendObject在LoadingDataListener.onSuccess回调中赋值
-                return mCurPage <= mTotalPage;
+             @Override
+            public boolean isMoreData(BaseLoadMoreRecyclerAdapter.LoadMoreViewHolder holder) {
+                System.out.println("isMoreData" + holder);
+               
+                return true;
             }
         };
 ```
