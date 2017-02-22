@@ -59,7 +59,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
 ##ItheimaRecyclerView添加头
 
-![](http://upload-images.jianshu.io/upload_images/4037105-41aad5195309486a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/4037105-63a59d3c9fe90c08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 * xml代码
 ```xml
@@ -216,7 +216,7 @@ pullToLoadMoreRecyclerView.setLoadingDataListener(new PullToLoadMoreRecyclerView
         }
 
         @Override
-        public void onSuccess(Bean o) {
+        public void onSuccess(Bean o ,,Headers headers) {
             //监听http请求成功，如果不需要监听可以不重新该方法
             L.i("setLoadingDataListener onSuccess: " + o);
         }
