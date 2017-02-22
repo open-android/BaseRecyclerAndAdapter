@@ -156,10 +156,11 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
 ```
 
 ### 下啦刷新 & 加载更多组合控件（下啦刷新和加载更多内部实现，你只需要在对应的ViewHolder做数据绑定即可）
+*http请求初始化
 ```java
 ItheimaHttp.init(context, baseUrl);//使用前必须调用（如果调用过则不需要重复调用）
 ```
-### xml布局
+* xml布局
 ```xml
 <android.support.v4.widget.SwipeRefreshLayout
     android:id="@+id/swipe_refresh_layout"
@@ -172,7 +173,7 @@ ItheimaHttp.init(context, baseUrl);//使用前必须调用（如果调用过则�
         android:layout_height="match_parent"/>
 </android.support.v4.widget.SwipeRefreshLayout>
 ```
-### java代码实现布局
+* java代码实现布局
 ```java
 pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshLayout, recyclerView, MyViewHolder.class) {
             @Override
@@ -198,7 +199,7 @@ pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshL
         };
 ```
 
-//设置监听
+* 设置监听
 ```java
 pullToLoadMoreRecyclerView.setLoadingDataListener(new PullToLoadMoreRecyclerView.LoadingDataListener<Bean>() {
 
