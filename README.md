@@ -89,9 +89,9 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 * java代码
 
 ```java
-RecyclerViewHeader header = (RecyclerViewHeader) findViewById(R.id.recycler_header);
-RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-header.attachTo(recyclerView);
+RecyclerViewHeader mRecyclerViewHeader = (RecyclerViewHeader) findViewById(R.id.recycler_header);
+ItheimaRecyclerView mItheimaRecyclerView = (ItheimaRecyclerView) findViewById(R.id.recycler_view);
+mRecyclerViewHeader.attachTo(mItheimaRecyclerView);
 ```
 
 ### 给RecyclerView的item添加点击事件和长按事件
