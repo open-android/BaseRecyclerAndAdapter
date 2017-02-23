@@ -36,7 +36,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
 ```xml
 <org.itheima.recycler.widget.ItheimaRecyclerView
-    android:id="@+id/recyclerview"
+    android:id="@+id/recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:spanCount="2"/>
@@ -44,14 +44,14 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 * 垂直滚动RecyclerView
 ```xml
 <org.itheima.recycler.widget.ItheimaRecyclerView
-    android:id="@+id/recyclerview"
+    android:id="@+id/recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 ```
 * 横向滚动RecyclerView（11:一行，12:二行.......,spanCount取值范围[11,19]）
 ```xml
 <org.itheima.recycler.widget.ItheimaRecyclerView
-    android:id="@+id/recyclerview"
+    android:id="@+id/recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:spanCount="12"/>
@@ -68,7 +68,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     android:layout_height="match_parent">
 
     <org.itheima.recycler.widget.ItheimaRecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -89,8 +89,8 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 * java代码
 
 ```java
-RecyclerViewHeader header = (RecyclerViewHeader) findViewById(R.id.header);
-RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+RecyclerViewHeader header = (RecyclerViewHeader) findViewById(R.id.recycler_header);
+RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 header.attachTo(recyclerView);
 ```
 
