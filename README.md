@@ -75,7 +75,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     <org.itheima.recycler.header.RecyclerViewHeader
         android:id="@+id/recycler_header"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|top">
 
         <TextView
