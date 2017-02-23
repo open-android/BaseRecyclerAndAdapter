@@ -175,7 +175,7 @@ ItheimaHttp.init(context, baseUrl);//使用前必须调用（如果调用过则�
 ```
 * java代码实现布局
 ```java
-pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshLayout, recyclerView, MyViewHolder.class) {
+pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshLayout, mRecyclerView, MyRecyclerViewHolder.class) {
             @Override
             public int getItemResId() {
                 //recylerview item资源id
