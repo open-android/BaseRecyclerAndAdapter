@@ -187,8 +187,8 @@ pullToLoadMoreRecyclerView = new PullToLoadMoreRecyclerView<Bean>(mSwipeRefreshL
                 //接口
                 return "order/list";
             }
-
-             @Override
+             //是否加载更多的数据，根据业务逻辑自行判断，true表示有更多的数据，false表示没有更多的数据，如果不需要监听可以不重写该方法
+             @Override
             public boolean isMoreData(BaseLoadMoreRecyclerAdapter.LoadMoreViewHolder holder) {
                 System.out.println("isMoreData" + holder);
                
