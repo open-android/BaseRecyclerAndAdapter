@@ -150,7 +150,7 @@ public static class MyRecyclerViewHolder extends BaseRecyclerViewHolder<DataBean
      * @param v
      */
     @OnClick(R.id.button)
-    public void click(CheckBox v) {
+    public void click(View v) {
     }
 }
 ```
