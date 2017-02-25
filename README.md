@@ -97,17 +97,20 @@ mRecyclerViewHeader.attachTo(mItheimaRecyclerView);
 ### 给RecyclerView的item添加点击事件和长按事件
 
 ```java
-mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mContext, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-    @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(mContext,"onItemClick",Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onItemLongClick(View view, int position) {
-        Toast.makeText(mContext,"onItemLongClick",Toast.LENGTH_LONG).show();
-    }
-}));
+  ItemClickSupport itemClickSupport = new ItemClickSupport(mRecyclerView);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Toast.makeText(mContext,"onItemClick",Toast.LENGTH_LONG).show();
+            }
+        });
+        itemClickSupport.setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
+                Toast.makeText(mContext,"setOnItemLongClickListener",Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
 ```
 
 ### BaseRecyclerAdapter使用方式
