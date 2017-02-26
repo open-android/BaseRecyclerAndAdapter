@@ -307,5 +307,3 @@ adapter.clearAllData();
 
 ![](http://oi5nqn6ce.bkt.clouddn.com/itheima/booster/code/qrcode.png)
 
-
-
