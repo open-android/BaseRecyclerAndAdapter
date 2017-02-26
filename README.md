@@ -23,7 +23,7 @@ allprojects {
 
 ### 2. 在Module的build.gradle添加依赖
 ```xml
-compile 'com.github.open-android:BaseRecyclerAndAdapter:0.5.11'
+compile 'com.github.open-android:BaseRecyclerAndAdapter:0.5.12'
 compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ```
@@ -97,17 +97,22 @@ header.attachTo(recyclerView);
 ### 给RecyclerView的item添加点击事件和长按事件
 
 ```java
-mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mContext, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+ItemClickSupport itemClickSupport = new ItemClickSupport(mRecyclerView);
+//点击事件
+itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
     @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(mContext,"onItemClick",Toast.LENGTH_LONG).show();
+    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+        Toast.makeText(recyclerView.getContext(), "我被点击了", Toast.LENGTH_SHORT).show();
     }
-
+});
+//长按事件
+itemClickSupport.setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
     @Override
-    public void onItemLongClick(View view, int position) {
-        Toast.makeText(mContext,"onItemLongClick",Toast.LENGTH_LONG).show();
+    public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
+        Toast.makeText(recyclerView.getContext(), "我被长按了", Toast.LENGTH_SHORT).show();
+        return false;
     }
-}));
+});
 ```
 
 ### BaseRecyclerAdapter使用方式
