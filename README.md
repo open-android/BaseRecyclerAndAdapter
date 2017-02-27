@@ -261,7 +261,7 @@ onSuccess回调在每一次加载数据成功后回调
 
 
 
-### Adapter分类
+### RecyclerView多条目展示
 ```java
 class MyTypeAdapter extends BaseRecyclerAdapter {
     private final int ITEM_TYPE_1 = 0;
