@@ -23,7 +23,7 @@ allprojects {
 
 ### 2. 在Module的build.gradle添加依赖
 ```groovy
-compile 'com.github.open-android:BaseRecyclerAndAdapter:0.5.12'
+compile 'com.github.open-android:BaseRecyclerAndAdapter:0.5.13'
 compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ```
