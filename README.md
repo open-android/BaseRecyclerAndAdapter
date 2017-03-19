@@ -28,7 +28,13 @@ compile 'com.jakewharton:butterknife:8.4.0'
 annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 ```
 
-
+### 3. 添加权限
+```groovy
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+```
 ### ItheimaRecyclerView使用方式
 
 
@@ -261,7 +267,7 @@ onSuccess回调在每一次加载数据成功后回调
 
 
 
-### Adapter分类
+### RecyclerView多条目展示
 ```java
 class MyTypeAdapter extends BaseRecyclerAdapter {
     private final int ITEM_TYPE_1 = 0;
@@ -306,6 +312,4 @@ adapter.clearAllData();
 欢迎关注微信公众号
 
 ![](http://oi5nqn6ce.bkt.clouddn.com/itheima/booster/code/qrcode.png)
-
-
 
