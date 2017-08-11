@@ -63,7 +63,7 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     app:spanCount="12"/>
 ```
 
-##ItheimaRecyclerView添加头
+### ItheimaRecyclerView添加头
 
 ![](http://upload-images.jianshu.io/upload_images/4037105-63a59d3c9fe90c08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
